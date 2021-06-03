@@ -1,0 +1,19 @@
+from scipy import integrate
+from pylab import *
+def rlc(A,t):    # defining function
+    Vc,x=A
+    V = 6.0 #voltageSource
+    R = 1.0  # resistance
+    L= 1 #100nH
+    C = 0.25 #1nF
+    result=array([x,(V-Vc-(x*R*C))/(L*C)])   # equation obtained after arranging
+    return result
+
+time = linspace(0.0,20,1000)  # defining the time interval here time is 0 to 20 and with 1000 rounds
+vc,x = integrate.odeint(rlc,[0.0,0.0],time).T
+figure()
+plot(time,vc , label ="time vs voltage", color ='red')  #plotting the graph time vs voltage
+xlabel('time')
+ylabel('voltage')
+plt.legend()
+show()
